@@ -47,5 +47,28 @@
 <a href="#" class="button" onclick="window.location.href = window.location.href;">
   Retry Connection
 </a>
+  <script>
+  const btn = document.getElementById("retryBtn");
+
+  btn.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    btn.style.opacity = "0.7";
+    btn.style.pointerEvents = "none";
+
+    let dots = 0;
+    btn.textContent = "Trying to reconnect";
+
+    const dotInterval = setInterval(() => {
+      dots = (dots + 1) % 4;
+      btn.textContent = "Trying to reconnect" + ".".repeat(dots);
+    }, 400);
+
+    setTimeout(() => {
+      clearInterval(dotInterval);
+      location.reload();
+    }, 2000);
+  });
+</script>
 </body>
 </html>
