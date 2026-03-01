@@ -1,19 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CrakkoCat</title>
+<meta name="description" content="Official website of CrakkoCat — projects, blog, and creative chaos.">
+
+<style>
+:root {
+    --orange: #ff7a00;
+    --dark: #111;
+    --gray: #1c1c1c;
+    --light: #f5f5f5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--dark);
+    color: var(--light);
+    line-height: 1.6;
+}
+
+header {
+    background: var(--gray);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.logo span:first-child {
+    color: var(--orange);
+}
+
+nav a {
+    color: var(--light);
+    text-decoration: none;
+    margin-left: 20px;
+    transition: 0.2s;
+}
+
+nav a:hover {
+    color: var(--orange);
+}
+
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+    background: linear-gradient(145deg, #111, #1f1f1f);
+}
+
+.hero h1 {
+    font-size: 3rem;
+}
+
+.hero h1 span:first-child {
+    color: var(--orange);
+}
+
+.hero p {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 28px;
+    background: var(--orange);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.button:hover {
+    transform: scale(1.05);
+}
+
+.section {
+    padding: 70px 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.section h2 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: var(--gray);
+    padding: 25px;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    background: #0c0c0c;
+    font-size: 0.9rem;
+    opacity: 0.6;
+}
+</style>
+</head>
+
 <body>
-<link rel="icon" type="image/png" href="/favicon-v2.png?v=2">
-  <link rel="icon" type="image/ico" href="/favicon-v2.ico?v=2">
-  <title>CrakkoCat</title>
-  <h1>CrakkoCat</h1>
-  <h2>Hey there! this is where I host my website. It's still under construction, but it will be done soon!</h2>
-  <a href="https://blog.crakkocat.com">Blog</a>
-  <a href="https://sourceforge.net/u/crakkocat/profile/">SourceForge</a>
-<a href="https://www.youtube.com/@its_CrakkoCat">YouTube</a>
-<a href="https://bsky.app/profile/crakkocat.bsky.social">Bluesky</a>
-  <a href="https://github.com/crakkocat">GitHub</a>
-  <a href="https://github.com/crakkocat/Cat-AOSP">Cat-AOSP's GitHub Repo</a>
-  <a href="https://cat-aosp.sourceforge.io">Cat-AOSP's SourceForge page</a>
-  <a href="https://github.com/crakkocat/RetroCat">RetroCat's GitHub Repo</a>
-  <a href="https://retrocat.sourceforge.io">RetroCat's SourceForge page</a>
-  <a href="https://github.com/crakkocat/Cat-AOSP/blob/main/README.md">Cat-AOSP's README.md</a>
-  <a href="https://github.com/crakkocat/RetroCat/blob/main/README.md">RetroCat's README.md</a>
-  
+
+<header>
+    <div class="logo"><span>Crakko</span>Cat</div>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1><span>Crakko</span>Cat</h1>
+    <p>Projects. Experiments. Creative chaos.</p>
+    <a href="#projects" class="button">View Projects</a>
+</section>
+
+<section class="section" id="projects">
+    <h2>Featured Projects</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>3DS Rebooter</h3>
+            <p>A Nintendo 3DS homebrew app that reboots the console instantly.</p>
+        </div>
+        <div class="card">
+            <h3>Blog</h3>
+            <p>Development logs, experiments, and thoughts.</p>
+        </div>
+        <div class="card">
+            <h3>Open Source</h3>
+            <p>Projects hosted on GitHub and SourceForge.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="about">
+    <h2>About</h2>
+    <p style="text-align:center; max-width:700px; margin:auto;">
+        Hi, I'm CrakkoCat. I build cool stuff, experiment with code,
+        and occasionally break things in the process.
+        This site is where everything lives.
+    </p>
+</section>
+
+<section class="section" id="contact">
+    <h2>Contact</h2>
+    <p style="text-align:center;">
+        You can find me on GitHub, YouTube, and other platforms.
+    </p>
+</section>
+
+<footer>
+    © 2026 CrakkoCat — All Rights Reserved
+</footer>
+
 </body>
+</html>
