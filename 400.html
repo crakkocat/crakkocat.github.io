@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +15,7 @@ body {
     align-items: center;
     height: 100vh;
     text-align: center;
+    overflow: hidden;
 }
 
 .container {
@@ -26,26 +28,40 @@ h1 {
 }
 
 p {
-    font-size: 20px;
+    font-size: 18px;
 }
 
-a {
-    color: white;
-    text-decoration: none;
+.info {
+    color: #aaaaaa;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+button {
+    background: transparent;
     border: 1px solid #ff4444;
+    color: white;
     padding: 10px 20px;
-    margin-top: 20px;
-    display: inline-block;
+    margin-top: 15px;
+    cursor: pointer;
+    font-family: monospace;
 }
 
-a:hover {
+button:hover {
     background: #ff4444;
     color: black;
 }
 
-@keyframes glitch {
-    0% { text-shadow: 2px 2px red; }
-    100% { text-shadow: -2px -2px crimson; }
+#reportStatus {
+    margin-top: 15px;
+    color: #00ff88;
+}
+
+a {
+    display:inline-block;
+    margin-top:10px;
+    color:white;
+    text-decoration:none;
 }
 </style>
 </head>
@@ -54,7 +70,46 @@ a:hover {
     <h1>400</h1>
     <p>CrakkoCat rejected your request.</p>
     <p>Did you try to break the internet?</p>
+
+    <div class="info">
+        Your IP: 201.57.165.168<br>
+        Security Level: Maximum Paranoia
+    </div>
+
+    <button onclick="fakeReport()">Report this to Cloudflare</button>
+    <br>
     <a href="/">Return to safety</a>
+
+    <div id="reportStatus"></div>
 </div>
+
+<script>
+function generateRayID() {
+    const chars = "abcdef0123456789";
+    let id = "";
+    for (let i = 0; i < 16; i++) {
+        id += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return id;
+}
+
+function fakeReport() {
+    const status = document.getElementById("reportStatus");
+    const rayID = generateRayID();
+
+    status.innerHTML = "Connecting to Cloudflare...";
+    
+    setTimeout(() => {
+        status.innerHTML = "Transmitting packet logs...";
+    }, 1000);
+
+    setTimeout(() => {
+        status.innerHTML = 
+            "Report sent successfully.<br>" +
+            "Ray ID: " + rayID + "<br>" +
+            "Cloudflare will look into this issue.";
+    }, 2000);
+}
+</script>
 </body>
 </html>
