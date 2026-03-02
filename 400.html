@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>400 – Bad Request | CrakkoCat</title>
+<style>
+body {
+    margin: 0;
+    background: black;
+    color: #ff4444;
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.container {
+    animation: glitch 1s infinite alternate;
+}
+
+h1 {
+    font-size: 100px;
+    margin: 0;
+}
+
+p {
+    font-size: 20px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    border: 1px solid #ff4444;
+    padding: 10px 20px;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+a:hover {
+    background: #ff4444;
+    color: black;
+}
+
+@keyframes glitch {
+    0% { text-shadow: 2px 2px red; }
+    100% { text-shadow: -2px -2px crimson; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>400</h1>
+    <p>CrakkoCat rejected your request.</p>
+    <p>Did you try to break the internet?</p>
+    <a href="/">Return to safety</a>
+</div>
+</body>
+</html>
