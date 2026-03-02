@@ -188,6 +188,119 @@ footer {
 <footer>
     © 2026 CrakkoCat — All Rights Reserved
 </footer>
+<div id="gd-game-container" style="margin-top:50px; text-align:center;">
+  <h2>CrakkoDash 😼</h2>
+  <canvas id="gdCanvas" width="800" height="250" style="background:#111; border:3px solid orange;"></canvas>
+  <br><br>
+  <button id="gdStartBtn" class="nav-button">Start Game</button>
+  <p id="gdScore">Score: 0</p>
+</div>
+    <script>
+const canvas = document.getElementById("gdCanvas");
+const ctx = canvas.getContext("2d");
+const startBtn = document.getElementById("gdStartBtn");
+const scoreText = document.getElementById("gdScore");
 
+let player, obstacles, gravity, velocity, gameSpeed;
+let score = 0;
+let gameRunning = false;
+let frame = 0;
+
+function resetGame() {
+  player = { x: 80, y: 180, width: 30, height: 30 };
+  obstacles = [];
+  gravity = 0.8;
+  velocity = 0;
+  gameSpeed = 6;
+  score = 0;
+  frame = 0;
+  scoreText.textContent = "Score: 0";
+}
+
+function drawPlayer() {
+  ctx.fillStyle = "orange";
+  ctx.fillRect(player.x, player.y, player.width, player.height);
+}
+
+function drawObstacle(obs) {
+  ctx.fillStyle = "red";
+  ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+}
+
+function spawnObstacle() {
+  obstacles.push({
+    x: canvas.width,
+    y: 190,
+    width: 20,
+    height: 60
+  });
+}
+
+function update() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  velocity += gravity;
+  player.y += velocity;
+
+  if (player.y > 180) {
+    player.y = 180;
+    velocity = 0;
+  }
+
+  if (frame % 90 === 0) spawnObstacle();
+
+  obstacles.forEach((obs, index) => {
+    obs.x -= gameSpeed;
+    drawObstacle(obs);
+
+    // Collision
+    if (
+      player.x < obs.x + obs.width &&
+      player.x + player.width > obs.x &&
+      player.y < obs.y + obs.height &&
+      player.y + player.height > obs.y
+    ) {
+      gameOver();
+    }
+
+    if (obs.x + obs.width < 0) {
+      obstacles.splice(index, 1);
+    }
+  });
+
+  drawPlayer();
+
+  score++;
+  scoreText.textContent = "Score: " + score;
+
+  frame++;
+  if (gameRunning) requestAnimationFrame(update);
+}
+
+function jump() {
+  if (player.y >= 180) {
+    velocity = -12;
+  }
+}
+
+function gameOver() {
+  gameRunning = false;
+  alert("Game Over! Score: " + score);
+  startBtn.disabled = false;
+}
+
+startBtn.addEventListener("click", () => {
+  resetGame();
+  gameRunning = true;
+  startBtn.disabled = true;
+  update();
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Space") jump();
+});
+
+canvas.addEventListener("click", jump);
+</script>
 </body>
 </html>
