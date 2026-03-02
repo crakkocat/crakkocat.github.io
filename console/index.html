@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CrakkoCat Console</title>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      background-color: black;
+      color: #00ff00;
+      font-family: monospace;
+      margin: 0;
+      padding: 20px;
+    }
+
+    #terminal {
+      white-space: pre-wrap;
+    }
+
+    #inputLine {
+      display: flex;
+    }
+
+    #commandInput {
+      background: black;
+      border: none;
+      color: #00ff00;
+      font-family: monospace;
+      flex: 1;
+      outline: none;
+    }
+
+    .glow {
+      text-shadow: 0 0 5px #00ff00;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="terminal" class="glow">
+CrakkoCat Secure Console v1.0
+Type "help" to begin.
+
+</div>
+
+<div id="inputLine">
+  <span>> </span>
+  <input type="text" id="commandInput" autofocus />
+</div>
+
+<script>
+const terminal = document.getElementById("terminal");
+const input = document.getElementById("commandInput");
+
+const commands = {
+  help: `
+Available commands:
+help        - Show commands
+meow        - Talk to the cat
+clicker     - Open CrakkoClicker
+cat-aosp    - Open Cat-AOSP
+retrocat    - Open RetroCat
+reboot      - Fake reboot
+clear       - Clear screen
+unlock      - ???
+`,
+
+  meow: "Meow detected. Hacker Cat acknowledges your presence. 😼",
+
+  clicker: () => window.location.href = "/clicker",
+
+  "cat-aosp": () => window.location.href = "https://cat-aosp.sourceforge.io",
+
+  retrocat: () => window.location.href = "https://retrocat.sourceforge.io",
+
+  reboot: `
+Rebooting system...
+[████████████] 100%
+System online.
+`,
+
+  clear: () => terminal.textContent = "",
+
+  unlock: "Secret command accepted. Visit /void 😼"
+};
+
+input.addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
+    const cmd = input.value.trim().toLowerCase();
+    terminal.textContent += "\n> " + cmd + "\n";
+
+    if (commands[cmd]) {
+      if (typeof commands[cmd] === "function") {
+        commands[cmd]();
+      } else {
+        terminal.textContent += commands[cmd] + "\n";
+      }
+    } else {
+      terminal.textContent += "Unknown command. Type 'help'.\n";
+    }
+
+    input.value = "";
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+});
+</script>
+
+</body>
+</html>
