@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CrakkoClicker</title>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      background-color: #111;
+      color: white;
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      background: orange;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #catButton {
+      font-size: 100px;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.1s;
+    }
+
+    #catButton:active {
+      transform: scale(0.9);
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>CRAKKOCLICKER 😼</h1>
+<h2 id="coinDisplay">MeowCoins: 0</h2>
+
+<div id="catButton">🐱</div>
+
+<h3>Upgrades</h3>
+
+<button id="autoClickerBtn">Auto-Meower (Cost: 50)</button>
+<p>Owned: <span id="autoCount">0</span></p>
+
+<button id="laserBtn">Laser Cat (Cost: 250)</button>
+<p>Owned: <span id="laserCount">0</span></p>
+
+<script>
+let coins = 0;
+let autoClickers = 0;
+let lasers = 0;
+
+function updateDisplay() {
+  document.getElementById("coinDisplay").textContent = "MeowCoins: " + Math.floor(coins);
+  document.getElementById("autoCount").textContent = autoClickers;
+  document.getElementById("laserCount").textContent = lasers;
+}
+
+function saveGame() {
+  localStorage.setItem("crakkoclickerSave", JSON.stringify({
+    coins,
+    autoClickers,
+    lasers
+  }));
+}
+
+function loadGame() {
+  const save = JSON.parse(localStorage.getItem("crakkoclickerSave"));
+  if (save) {
+    coins = save.coins || 0;
+    autoClickers = save.autoClickers || 0;
+    lasers = save.lasers || 0;
+  }
+}
+
+document.getElementById("catButton").addEventListener("click", () => {
+  coins += 1 + lasers * 5;
+  updateDisplay();
+  saveGame();
+});
+
+document.getElementById("autoClickerBtn").addEventListener("click", () => {
+  let cost = 50 * (autoClickers + 1);
+  if (coins >= cost) {
+    coins -= cost;
+    autoClickers++;
+    updateDisplay();
+    saveGame();
+  }
+});
+
+document.getElementById("laserBtn").addEventListener("click", () => {
+  let cost = 250 * (lasers + 1);
+  if (coins >= cost) {
+    coins -= cost;
+    lasers++;
+    updateDisplay();
+    saveGame();
+  }
+});
+
+setInterval(() => {
+  coins += autoClickers * 1;
+  updateDisplay();
+  saveGame();
+}, 1000);
+
+loadGame();
+updateDisplay();
+</script>
+
+</body>
+</html>
