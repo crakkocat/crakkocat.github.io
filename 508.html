@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>508 - Loop Detected</title>
+  <style>
+    body {
+      background-color: #000;
+      color: orange;
+      font-family: Consolas, monospace;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    h1 {
+      font-size: 80px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 20px;
+      color: white;
+      margin-bottom: 30px;
+    }
+
+    .cat {
+      font-size: 60px;
+      animation: spin 2s linear infinite;
+      margin-bottom: 20px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: orange;
+      color: black;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .button:hover {
+      background-color: black;
+      color: orange;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="cat">😵</div>
+  <h1>508</h1>
+  <p>Infinite loop detected.</p>
+  <p>The cats are stuck chasing their tails.</p>
+
+  <a href="https://www.crakkocat.com" class="button">
+  Return to CrakkoCat
+</a>
+</body>
+</html>
