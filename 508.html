@@ -59,6 +59,7 @@
 
   <a href="https://www.crakkocat.com" class="button">
   Return to CrakkoCat
+  </a>
     <div id="gameArea" style="position:relative; height:300px; margin-top:40px; border:2px dashed orange;">
   <div id="catGame" style="position:absolute; font-size:40px; cursor:pointer;">🐱</div>
 </div>
@@ -66,6 +67,60 @@
 <p id="scoreDisplay">Score: 0</p>
 <p id="timerDisplay">Time: 10</p>
 <button id="startGame" class="button">Start Game</button>
-</a>
+  <script>
+  const cat = document.getElementById("catGame");
+  const gameArea = document.getElementById("gameArea");
+  const scoreDisplay = document.getElementById("scoreDisplay");
+  const timerDisplay = document.getElementById("timerDisplay");
+  const startBtn = document.getElementById("startGame");
+
+  let score = 0;
+  let timeLeft = 10;
+  let gameInterval;
+  let timerInterval;
+
+  function moveCat() {
+    const maxX = gameArea.clientWidth - 40;
+    const maxY = gameArea.clientHeight - 40;
+
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+
+    cat.style.left = randomX + "px";
+    cat.style.top = randomY + "px";
+  }
+
+  cat.addEventListener("click", () => {
+    score++;
+    scoreDisplay.textContent = "Score: " + score;
+    moveCat();
+  });
+
+  function startGame() {
+    score = 0;
+    timeLeft = 10;
+    scoreDisplay.textContent = "Score: 0";
+    timerDisplay.textContent = "Time: 10";
+    startBtn.disabled = true;
+
+    moveCat();
+
+    gameInterval = setInterval(moveCat, 800);
+
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      timerDisplay.textContent = "Time: " + timeLeft;
+
+      if (timeLeft <= 0) {
+        clearInterval(gameInterval);
+        clearInterval(timerInterval);
+        startBtn.disabled = false;
+        alert("Game Over! Your score: " + score);
+      }
+    }, 1000);
+  }
+
+  startBtn.addEventListener("click", startGame);
+</script>
 </body>
 </html>
