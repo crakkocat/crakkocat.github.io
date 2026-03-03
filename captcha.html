@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Security Check | CrakkoCat</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f6f6f6;
+    margin: 0;
+    text-align: center;
+    color: #333;
+}
+
+.wrapper {
+    max-width: 500px;
+    margin: 120px auto;
+}
+
+.box {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.captcha {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.checkbox {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #555;
+    margin-right: 12px;
+    display: inline-block;
+    position: relative;
+}
+
+.checkbox.checked::after {
+    content: "✔";
+    position: absolute;
+    left: 3px;
+    top: -2px;
+    font-size: 18px;
+    color: green;
+}
+
+.footer {
+    font-size: 12px;
+    color: #777;
+    margin-top: 20px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 8px 15px;
+    border: none;
+    background: #f38020;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #d96c15;
+}
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="box">
+        <h2>Verify you are human</h2>
+        <p>Complete the security check to access CrakkoCat.com</p>
+
+        <div class="captcha" onclick="startCheck()">
+            <div class="checkbox" id="box"></div>
+            <div id="label">I'm not a robot</div>
+        </div>
+
+        <div id="status"></div>
+
+        <div class="footer">
+            IP: 201.57.165.168<br>
+            Ray ID: <span id="rayid"></span><br>
+            CrakkoShield™ Human Verification
+        </div>
+    </div>
+</div>
+
+<script>
+function generateRayID() {
+    const chars = "abcdef0123456789";
+    let id = "";
+    for (let i = 0; i < 16; i++) {
+        id += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return id;
+}
+
+document.getElementById("rayid").textContent = generateRayID();
+
+function startCheck() {
+    const box = document.getElementById("box");
+    const label = document.getElementById("label");
+    const status = document.getElementById("status");
+
+    if (box.classList.contains("checked")) return;
+
+    label.textContent = "Checking...";
+    status.innerHTML = "<p>Analyzing mouse movements...</p>";
+
+    setTimeout(() => {
+        const pass = Math.random() > 0.2; // 80% success rate
+
+        if (pass) {
+            box.classList.add("checked");
+            label.textContent = "Verification successful";
+            status.innerHTML = "<p style='color:green;'>You are probably human.</p>";
+
+            setTimeout(() => {
+                window.location.href = "/";
+            }, 1500);
+
+        } else {
+            label.textContent = "Suspicious activity detected";
+            status.innerHTML = "<p style='color:red;'>Please try again.</p>";
+        }
+    }, 2000);
+}
+</script>
+
+</body>
+</html>
