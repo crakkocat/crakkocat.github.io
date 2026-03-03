@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Just a moment... | CrakkoCat</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f6f6f6;
+    margin: 0;
+    text-align: center;
+    color: #333;
+}
+
+.wrapper {
+    max-width: 600px;
+    margin: 120px auto;
+}
+
+.loader {
+    margin: 30px auto;
+    border: 6px solid #eee;
+    border-top: 6px solid #f38020;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+.status {
+    text-align: left;
+    margin-top: 30px;
+    font-size: 14px;
+}
+
+.check {
+    margin: 6px 0;
+}
+
+.footer {
+    font-size: 12px;
+    color: #777;
+    margin-top: 40px;
+}
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+    <h1>Checking your browser before accessing CrakkoCat.com</h1>
+    <p>This process is automatic. Your browser will redirect shortly.</p>
+
+    <div class="loader"></div>
+
+    <p>Estimated wait time: <span id="countdown">5</span> seconds</p>
+
+    <div class="status" id="statusBox">
+        <div class="check">✔ Browser integrity check</div>
+        <div class="check">✔ Verifying human presence</div>
+        <div class="check">✔ Analyzing traffic patterns</div>
+        <div class="check">✔ Inspecting tuna packets</div>
+        <div class="check">✔ Blocking suspicious cats</div>
+    </div>
+
+    <div class="footer">
+        IP: 201.57.165.168<br>
+        Ray ID: <span id="rayid"></span><br>
+        DDoS protection by Cloudflare<br>
+        CrakkoShield™ Attack Mitigation Layer
+    </div>
+</div>
+
+<script>
+function generateRayID() {
+    const chars = "abcdef0123456789";
+    let id = "";
+    for (let i = 0; i < 16; i++) {
+        id += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return id;
+}
+
+document.getElementById("rayid").textContent = generateRayID();
+
+let timeLeft = 5;
+const countdownEl = document.getElementById("countdown");
+
+const timer = setInterval(() => {
+    timeLeft--;
+    countdownEl.textContent = timeLeft;
+
+    if (timeLeft <= 0) {
+        clearInterval(timer);
+        window.location.href = "/";
+    }
+}, 1000);
+</script>
+
+</body>
+</html>
