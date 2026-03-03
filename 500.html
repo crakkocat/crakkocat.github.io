@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>500 – Internal Server Error | CrakkoCat</title>
+<style>
+body {
+    margin: 0;
+    background: black;
+    color: #ff0000;
+    font-family: monospace;
+    height: 100vh;
+    overflow: hidden;
+    animation: shake 0.2s infinite;
+}
+
+.container {
+    text-align: center;
+    position: relative;
+    top: 30%;
+}
+
+h1 {
+    font-size: 90px;
+    margin: 0;
+    animation: flicker 1s infinite alternate;
+}
+
+p {
+    font-size: 18px;
+}
+
+button {
+    background: transparent;
+    border: 1px solid red;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-family: monospace;
+}
+
+button:hover {
+    background: red;
+    color: black;
+}
+
+#errorSpam {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 12px;
+    color: #550000;
+    pointer-events: none;
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px); }
+    50% { transform: translate(-1px, -1px); }
+    100% { transform: translate(1px, -1px); }
+}
+
+@keyframes flicker {
+    0% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+</style>
+</head>
+<body>
+
+<div id="errorSpam"></div>
+
+<div class="container">
+    <h1>500</h1>
+    <p>Internal Server Error</p>
+    <p>CrakkoCat's server has emotionally collapsed.</p>
+    <p>Status: MELTDOWN</p>
+
+    <button onclick="rebootServer()">Attempt Emergency Reboot</button>
+</div>
+
+<script>
+const spam = document.getElementById("errorSpam");
+
+function randomErrorLine() {
+    const errors = [
+        "Fatal Exception: CatOverflowError",
+        "Segmentation fault (core meowed)",
+        "Server.exe has stopped responding",
+        "Memory leak detected in tuna.dll",
+        "Stack overflow at 0xCrakko",
+        "Unexpected cat in production"
+    ];
+
+    const line = document.createElement("div");
+    line.textContent = errors[Math.floor(Math.random() * errors.length)];
+    line.style.position = "absolute";
+    line.style.top = Math.random() * window.innerHeight + "px";
+    line.style.left = Math.random() * window.innerWidth + "px";
+
+    spam.appendChild(line);
+
+    setTimeout(() => {
+        spam.removeChild(line);
+    }, 2000);
+}
+
+setInterval(randomErrorLine, 150);
+
+function rebootServer() {
+    document.body.style.animation = "none";
+    document.body.style.background = "black";
+    spam.innerHTML = "";
+    document.querySelector(".container").innerHTML = `
+        <h1>REBOOTING...</h1>
+        <p>Please wait while we blame Cloudflare.</p>
+    `;
+
+    setTimeout(() => {
+        window.location.href = "/";
+    }, 3000);
+}
+</script>
+
+</body>
+</html>
