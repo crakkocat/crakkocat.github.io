@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CrakkoCat – Cat of the Day</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fdf6e3;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+    color: #ff6600;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #555;
+}
+
+.cat-image {
+    width: 300px;
+    height: 300px;
+    border-radius: 16px;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 4px solid #ff9900;
+}
+
+button {
+    background: #ff9900;
+    border: none;
+    color: black;
+    padding: 12px 24px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+</style>
+</head>
+<body>
+
+<h1>CrakkoCat – Cat of the Day</h1>
+<h2>Meet today’s featured feline!</h2>
+
+<img src="https://placekitten.com/400/400" alt="Cat of the Day" class="cat-image" id="catImage">
+
+<p id="catFact">This little guy loves napping on keyboards and judging your browsing habits.</p>
+
+<button onclick="nextCat()">Next Cat</button>
+
+<script>
+const cats = [
+    {
+        img: "https://placekitten.com/400/400",
+        fact: "This little guy loves napping on keyboards and judging your browsing habits."
+    },
+    {
+        img: "https://placekitten.com/401/400",
+        fact: "This cat thinks vertically stacked books are perfect climbing structures."
+    },
+    {
+        img: "https://placekitten.com/400/401",
+        fact: "This kitty insists on being fed exactly at 3:14 PM."
+    },
+    {
+        img: "https://placekitten.com/399/400",
+        fact: "It can stare at you for hours without blinking. Fearless."
+    }
+];
+
+let current = 0;
+
+function nextCat() {
+    current = (current + 1) % cats.length;
+    document.getElementById("catImage").src = cats[current].img;
+    document.getElementById("catFact").textContent = cats[current].fact;
+}
+</script>
+
+</body>
+</html>
