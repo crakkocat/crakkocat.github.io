@@ -91,6 +91,12 @@ const index = dayNumber % cats.length;
 // Display it
 document.getElementById("catImage").src = cats[index].img;
 document.getElementById("catFact").textContent = cats[index].fact;
+    <script>
+if (Math.random() < 0.2) { // 20% chance
+    document.body.style.background = "black";
+    document.body.style.color = "lime";
+    document.body.innerHTML += "<p>System Error: Cat.exe has stopped working.</p>";
+}
 </script>
 
 </body>
