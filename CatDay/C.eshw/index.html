@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cat.exe has stopped responding</title>
+<style>
+body {
+    margin: 0;
+    background: #0078d7; /* Windows blue */
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.window {
+    background: white;
+    width: 420px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    overflow: hidden;
+}
+
+.titlebar {
+    background: #f0f0f0;
+    padding: 10px;
+    font-weight: 600;
+}
+
+.content {
+    padding: 20px;
+    color: #333;
+}
+
+.buttons {
+    padding: 15px;
+    text-align: right;
+    background: #f9f9f9;
+}
+
+button {
+    padding: 6px 14px;
+    margin-left: 8px;
+    border: 1px solid #ccc;
+    background: #e6e6e6;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #dcdcdc;
+}
+
+.status {
+    font-size: 13px;
+    color: #666;
+    margin-top: 10px;
+}
+</style>
+</head>
+<body>
+
+<div class="window">
+    <div class="titlebar">
+        Cat.exe
+    </div>
+
+    <div class="content">
+        <strong>Cat.exe is not responding.</strong>
+        <p>If you close the program, you might lose information.</p>
+        <div class="status" id="statusText">
+            Windows is checking for a solution to the problem...
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button onclick="waitMode()">Wait</button>
+        <button onclick="endTask()">End Task</button>
+    </div>
+</div>
+
+<script>
+function waitMode() {
+    document.getElementById("statusText").textContent =
+        "Still not responding...";
+}
+
+function endTask() {
+    document.body.innerHTML = `
+        <div style="color:white; text-align:center; font-family:monospace;">
+            <h1>Cat.exe has been terminated.</h1>
+            <p>Error Code: CAT-RESP-01</p>
+            <p><a href="/CatDay" style="color:yellow;">Restart Cat.exe</a></p>
+        </div>
+    `;
+    document.body.style.background = "black";
+}
+</script>
+
+</body>
+</html>
