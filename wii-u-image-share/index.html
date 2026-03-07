@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CrakkoCat Image Share</title>
+<style>
+body{
+    font-family: Arial;
+    background:#e9f1f7;
+    text-align:center;
+}
+
+.box{
+    background:white;
+    padding:20px;
+    margin:40px auto;
+    width:350px;
+    border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>CrakkoCat Image Share</h1>
+<p>Upload a screenshot to Bluesky</p>
+
+<div class="box">
+
+<input id="handle" placeholder="Bluesky handle"><br><br>
+<input id="password" type="password" placeholder="App password"><br><br>
+
+<input type="file" id="image"><br><br>
+
+<button onclick="upload()">Post Image</button>
+
+<p id="status"></p>
+
+</div>
+
+<script>
+
+async function upload(){
+
+const handle = document.getElementById("handle").value
+const password = document.getElementById("password").value
+const file = document.getElementById("image").files[0]
+
+const status = document.getElementById("status")
+status.innerText = "Logging in..."
+
+try{
+
+const login = await fetch(
+"https://bsky.social/xrpc/com.atproto.server.createSession",
+{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+identifier:handle,
+password:password
+})
+})
+
+const session = await login.json()
+
+const token = session.accessJwt
+const did = session.did
+
+status.innerText = "Uploading image..."
+
+const imgBuffer = await file.arrayBuffer()
+
+const blobUpload = await fetch(
+"https://bsky.social/xrpc/com.atproto.repo.uploadBlob",
+{
+method:"POST",
+headers:{
+Authorization:`Bearer ${token}`,
+"Content-Type":file.type
+},
+body:imgBuffer
+})
+
+const blob = await blobUpload.json()
+
+status.innerText = "Posting..."
+
+await fetch(
+"https://bsky.social/xrpc/com.atproto.repo.createRecord",
+{
+method:"POST",
+headers:{
+Authorization:`Bearer ${token}`,
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+repo:did,
+collection:"app.bsky.feed.post",
+record:{
+text:"Uploaded from CrakkoCat Image Share",
+createdAt:new Date().toISOString(),
+embed:{
+"$type":"app.bsky.embed.images",
+images:[{
+image:blob.blob,
+alt:"Uploaded image"
+}]
+}
+}
+})
+})
+
+status.innerText="Posted successfully!"
+
+}
+catch(err){
+status.innerText="Upload failed."
+}
+
+}
+
+</script>
+
+</body>
+</html>
