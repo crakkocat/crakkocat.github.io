@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sign Up - CrakkoCat</title>
+</head>
+
+<body>
+
+<h2>Create CrakkoCat Account</h2>
+
+<input id="email" placeholder="Email"><br><br>
+<input id="password" type="password" placeholder="Password"><br><br>
+
+<button onclick="signup()">Create Account</button>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "PASTE_API_KEY",
+  authDomain: "PASTE_DOMAIN",
+  projectId: "PASTE_PROJECT_ID",
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+
+window.signup = function(){
+
+const email = document.getElementById("email").value
+const pass = document.getElementById("password").value
+
+createUserWithEmailAndPassword(auth,email,pass)
+.then(()=>alert("Account created!"))
+.catch(e=>alert(e.message))
+
+}
+
+</script>
+
+</body>
+</html>
