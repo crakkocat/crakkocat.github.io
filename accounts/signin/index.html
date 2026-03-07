@@ -1,0 +1,31 @@
+<input id="email" placeholder="Email">
+<input id="password" type="password">
+
+<button onclick="login()">Sign In</button>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "PASTE_API_KEY",
+  authDomain: "PASTE_DOMAIN",
+  projectId: "PASTE_PROJECT_ID",
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+
+window.login = function(){
+
+const email = document.getElementById("email").value
+const pass = document.getElementById("password").value
+
+signInWithEmailAndPassword(auth,email,pass)
+.then(()=>alert("Logged in!"))
+.catch(e=>alert(e.message))
+
+}
+
+</script>
