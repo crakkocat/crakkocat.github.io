@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CrakkoCat | Current Time</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+.header {
+    background: #111;
+    padding: 20px;
+}
+
+.logo {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.crakko {
+    color: orange;
+}
+
+.cat {
+    color: black;
+    background: white;
+    padding: 2px 6px;
+}
+
+/* Main content */
+.container {
+    margin-top: 100px;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+#time {
+    font-size: 70px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* Footer */
+.footer {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    font-size: 16px;
+    color: #555;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">
+        <span class="crakko">Crakko</span><span class="cat">Cat</span>
+    </div>
+</div>
+
+<div class="container">
+    <h1>Current Time for CrakkoCat</h1>
+    <div id="time">Loading...</div>
+</div>
+
+<div class="footer">
+    www.crakkocat.com
+</div>
+
+<script>
+function updateTime() {
+    const options = {
+        timeZone: "America/Denver",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true
+    };
+
+    const formatter = new Intl.DateTimeFormat("en-US", options);
+    document.getElementById("time").textContent = formatter.format(new Date());
+}
+
+setInterval(updateTime, 1000);
+updateTime();
+</script>
+
+</body>
+</html>
