@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CrakkoCat | Cat Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0f172a;
+            color: white;
+            text-align: center;
+            margin-top: 150px;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #38bdf8;
+        }
+
+        .search-box {
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            width: 400px;
+            padding: 12px;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .buttons {
+            margin-top: 15px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: none;
+            background-color: #38bdf8;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0ea5e9;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🐱 CrakkoCat | Cat Search</h1>
+    <p>Search the internet with your kitties</p>
+    <div class="search-box">
+        <form action="https://www.google.com/search" method="GET">
+            <input type="text" name="q" placeholder="Search with CrakkoCat..." required>
+           
+            <div class="buttons">
+                <button type="submit">Cat it!</button>
+                <button type="submit" name="btnI" value="1">I'm Feeling Meow</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
