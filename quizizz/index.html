@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Impossible Quiz Chaos</title>
+<style>
+body {
+    font-family: Arial;
+    background: #111;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
+
+#quiz-box {
+    margin-top: 50px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
+
+#hidden {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 10%;
+    left: 80%;
+    opacity: 0;
+}
+</style>
+</head>
+<body>
+
+<h2 id="question"></h2>
+<div id="answers"></div>
+
+<p>Lives: <span id="lives">3</span> | Skips: <span id="skips">2</span> | Time: <span id="time">10</span></p>
+<button onclick="skip()">Skip Question</button>
+
+<div id="hidden" onclick="correctAnswer()"></div>
+
+<audio id="correctSnd" src="https://www.myinstants.com/media/sounds/correct.mp3"></audio>
+<audio id="wrongSnd" src="https://www.myinstants.com/media/sounds/wrong.mp3"></audio>
+
+<script>
+let lives = 3;
+let skips = 2;
+let current = 0;
+let timer = 10;
+let interval;
+
+const questions = [
+    {
+        q: "What is 2 + 2?",
+        answers: ["4", "Fish", "22", "Window"],
+        correct: 1
+    },
+    {
+        q: "Click the correct answer (one moves!)",
+        answers: ["Catch me", "Nope", "Wrong", "Still wrong"],
+        correct: 0,
+        move: true
+    },
+    {
+        q: "Find the hidden answer",
+        answers: ["This", "Is", "All wrong"],
+        correct: "hidden"
+    },
+    {
+        q: "DON'T click the obvious one",
+        answers: ["Correct", "Definitely Correct", "Wrong one 😉"],
+        correct: 2
+    },
+    {
+        q: "Final: Wait for it...",
+        answers: ["Too early", "Too early", "Now!"],
+        correct: 2,
+        delay: true
+    }
+];
+
+function startTimer() {
+    timer = 10;
+    document.getElementById("time").innerText = timer;
+
+    clearInterval(interval);
+    interval = setInterval(() => {
+        timer--;
+        document.getElementById("time").innerText = timer;
+
+        if (timer <= 0) {
+            loseLife();
+        }
+    }, 1000);
+}
+
+function loadQuestion() {
+    if (current >= questions.length) {
+        document.body.innerHTML = "<h1>YOU WIN 🎉</h1>";
+        return;
+    }
+
+    startTimer();
+
+    const q = questions[current];
+    document.getElementById("question").innerText = q.q;
+
+    const answersDiv = document.getElementById("answers");
+    answersDiv.innerHTML = "";
+
+    document.getElementById("hidden").style.display = 
+        (q.correct === "hidden") ? "block" : "none";
+
+    q.answers.forEach((ans, index) => {
+        const btn = document.createElement("button");
+        btn.innerText = ans;
+
+        btn.onclick = () => checkAnswer(index);
+
+        if (q.move && index === q.correct) {
+            btn.onmouseover = () => {
+                btn.style.position = "absolute";
+                btn.style.top = Math.random() * 80 + "%";
+                btn.style.left = Math.random() * 80 + "%";
+            };
+        }
+
+        if (q.delay) {
+            btn.onclick = () => {
+                if (timer <= 5 && index === q.correct) {
+                    correctAnswer();
+                } else {
+                    loseLife();
+                }
+            };
+        }
+
+        answersDiv.appendChild(btn);
+    });
+}
+
+function checkAnswer(index) {
+    const q = questions[current];
+
+    if (index === q.correct) {
+        correctAnswer();
+    } else {
+        loseLife();
+    }
+}
+
+function correctAnswer() {
+    document.getElementById("correctSnd").play();
+    current++;
+    loadQuestion();
+}
+
+function loseLife() {
+    document.getElementById("wrongSnd").play();
+    lives--;
+    document.getElementById("lives").innerText = lives;
+
+    if (lives <= 0) {
+        document.body.innerHTML = "<h1>GAME OVER 💀</h1>";
+    } else {
+        loadQuestion();
+    }
+}
+
+function skip() {
+    if (skips > 0) {
+        skips--;
+        document.getElementById("skips").innerText = skips;
+        current++;
+        loadQuestion();
+    }
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>
