@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn Japanese!</title>
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#111827;
+    color:white;
+}
+
+header{
+    background:linear-gradient(90deg,#ef4444,#dc2626);
+    padding:50px 20px;
+    text-align:center;
+}
+
+header h1{
+    margin:0;
+    font-size:3rem;
+}
+
+header p{
+    margin-top:10px;
+    font-size:1.2rem;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:30px;
+}
+
+.card{
+    background:#1f2937;
+    padding:25px;
+    border-radius:20px;
+    margin-bottom:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.4);
+}
+
+h2{
+    color:#fca5a5;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+
+.word{
+    background:#374151;
+    padding:15px;
+    border-radius:15px;
+    text-align:center;
+}
+
+.quiz-question{
+    margin-top:20px;
+}
+
+.answers{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:10px;
+}
+
+.answer{
+    padding:12px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
+    text-align:center;
+}
+
+.red{background:#ef4444;}
+.blue{background:#3b82f6;}
+.yellow{background:#facc15;color:black;}
+.green{background:#22c55e;}
+
+.answer:hover{
+    transform:scale(1.03);
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    opacity:0.7;
+}
+
+button{
+    padding:14px 20px;
+    border:none;
+    border-radius:12px;
+    background:#dc2626;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:15px;
+}
+
+button:hover{
+    background:#ef4444;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>🇯🇵 Learn Japanese!</h1>
+    <p>Japanese language, culture, and a Kahoot-style quiz!</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Basic Japanese Words</h2>
+        <div class="grid">
+            <div class="word">
+                <h3>こんにちは</h3>
+                <p>Hello</p>
+            </div>
+
+            <div class="word">
+                <h3>ありがとう</h3>
+                <p>Thank You</p>
+            </div>
+
+            <div class="word">
+                <h3>ねこ</h3>
+                <p>Cat</p>
+            </div>
+
+            <div class="word">
+                <h3>さようなら</h3>
+                <p>Goodbye</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Japanese Writing Systems</h2>
+        <p>
+            Japanese uses three writing systems:
+        </p>
+
+        <ul>
+            <li><strong>Hiragana</strong> — used for native Japanese words.</li>
+            <li><strong>Katakana</strong> — used for foreign words and names.</li>
+            <li><strong>Kanji</strong> — Chinese characters used in Japanese.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Fun Facts About Japan</h2>
+
+        <ul>
+            <li>🍣 Sushi is one of Japan’s most famous foods.</li>
+            <li>🎌 Japan’s capital city is Tokyo.</li>
+            <li>🎮 Japan created Nintendo, Pokémon, and many famous anime.</li>
+            <li>⛩️ Shrines and temples are important parts of Japanese culture.</li>
+        </ul>
+    </div>
+</body>
+</html>
