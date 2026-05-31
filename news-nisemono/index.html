@@ -100,17 +100,47 @@ button:hover{
 
     <textarea id="story" rows="8" placeholder="Write your fake news story..."></textarea>
 
-    <button onclick="generateArticle()">
-        Generate Fake News
-    </button>
+    <script>
+function generateArticle() {
+    const headline = document.getElementById("headline").value;
+    const story = document.getElementById("story").value;
+    const imageFile = document.getElementById("imageUpload").files[0];
 
-    <div id="article" class="article">
-        <img id="articleImage" src="">
-        <div class="content">
-            <div id="articleHeadline" class="headline"></div>
-            <p id="articleStory"></p>
-            <div class="watermark">
-                Published by CCN
+    if (!headline || !story) {
+        alert("Fill out both fields!");
+        return;
+    }
+     <button onclick="generateArticle()">
+    Generate Fake News
+</button>
+
+<button onclick="exportPNG()">
+    Export Fake News as PNG
+</button>
+
+    document.getElementById("articleHeadline").textContent = headline;
+    document.getElementById("articleStory").textContent = story;
+
+    const article = document.getElementById("article");
+    const articleImage = document.getElementById("articleImage");
+
+    if (imageFile) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            articleImage.src = e.target.result;
+            article.style.display = "block";
+        };
+
+        reader.readAsDataURL(imageFile);
+    } else {
+        // Default image if none uploaded
+        articleImage.src =
+            "https://placehold.co/1200x600?text=CrakkoCat+News";
+        article.style.display = "block";
+    }
+}
+</script>
             </div>
         </div>
     </div>
@@ -130,13 +160,8 @@ function generateArticle() {
     document.getElementById("articleHeadline").textContent = headline;
     document.getElementById("articleStory").textContent = story;
 
-    // Get first keyword from headline
-    let keyword = headline.split(" ")[0];
-
-    // Random related image
-    document.getElementById("articleImage").src =
-        `https://source.unsplash.com/1200x600/?${encodeURIComponent(keyword)}`;
-
+  <label>Upload Article Image</label>
+<input type="file" id="imageUpload" accept="image/*">
     document.getElementById("article").style.display = "block";
 }
 </script>
