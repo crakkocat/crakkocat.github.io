@@ -4,9 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CrakkoCat Fake News Creator</title>
-     <link rel="icon" type="image/png" sizes="16x16" href="https://www.crakkocat.com/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://www.crakkocat.com/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="https://www.crakkocat.com/favicon-96x96.png">
 
 <style>
 body{
@@ -110,13 +107,6 @@ function generateArticle() {
         alert("Fill out both fields!");
         return;
     }
-     <button onclick="generateArticle()">
-    Generate Fake News
-</button>
-
-<button onclick="exportPNG()">
-    Export Fake News as PNG
-</button>
 
     document.getElementById("articleHeadline").textContent = headline;
     document.getElementById("articleStory").textContent = story;
@@ -141,6 +131,20 @@ function generateArticle() {
     }
 }
 </script>
+     <button onclick="generateArticle()">
+        Generate Fake News
+    </button>
+     <button onclick="exportPNG()">
+    Export Fake News as PNG
+</button>
+
+    <div id="article" class="article">
+        <img id="articleImage" src="">
+        <div class="content">
+            <div id="articleHeadline" class="headline"></div>
+            <p id="articleStory"></p>
+            <div class="watermark">
+                Published by CrakkoCat News Network
             </div>
         </div>
     </div>
@@ -160,9 +164,36 @@ function generateArticle() {
     document.getElementById("articleHeadline").textContent = headline;
     document.getElementById("articleStory").textContent = story;
 
-  <label>Upload Article Image</label>
+ <label>Upload Article Image</label>
 <input type="file" id="imageUpload" accept="image/*">
-    document.getElementById("article").style.display = "block";
+</script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+     <script>
+function exportPNG() {
+    const article = document.getElementById("article");
+
+    if (article.style.display === "none" || article.style.display === "") {
+        alert("Generate an article first!");
+        return;
+    }
+
+    html2canvas(article, {
+        useCORS: true,
+        scale: 2
+    }).then(canvas => {
+
+        const link = document.createElement("a");
+
+        // Create filename from headline
+        const headline =
+            document.getElementById("articleHeadline").textContent
+            .replace(/[^a-z0-9]/gi, "_")
+            .toLowerCase();
+
+        link.download = `${headline || "crakkocat_news"}.png`;
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+    });
 }
 </script>
 
