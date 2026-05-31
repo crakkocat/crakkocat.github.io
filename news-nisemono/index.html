@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CrakkoCat Fake News Creator</title>
+     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background: #1b1029;
+    color: white;
+    margin:0;
+}
+
+header{
+    background: #7a3cff;
+    padding:20px;
+    text-align:center;
+}
+
+.logo{
+    font-size:2em;
+    font-weight:bold;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+}
+
+input, textarea{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:10px;
+    box-sizing:border-box;
+}
+
+button{
+    background:#7a3cff;
+    color:white;
+    border:none;
+    padding:12px 24px;
+    border-radius:10px;
+    margin-top:15px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#9d6bff;
+}
+
+.article{
+    display:none;
+    margin-top:30px;
+    background:#2a1d3d;
+    border-radius:15px;
+    overflow:hidden;
+}
+
+.article img{
+    width:100%;
+    height:400px;
+    object-fit:cover;
+}
+
+.content{
+    padding:20px;
+}
+
+.headline{
+    font-size:2em;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.watermark{
+    color:#b89cff;
+    font-size:14px;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo">🐱 CrakkoCat Fake News Creator</div>
+    <p>Create hilarious parody news articles</p>
+</header>
+
+<div class="container">
+
+    <input id="headline" placeholder="Enter a fake headline">
+
+    <textarea id="story" rows="8" placeholder="Write your fake news story..."></textarea>
+
+    <button onclick="generateArticle()">
+        Generate Fake News
+    </button>
+
+    <div id="article" class="article">
+        <img id="articleImage" src="">
+        <div class="content">
+            <div id="articleHeadline" class="headline"></div>
+            <p id="articleStory"></p>
+            <div class="watermark">
+                Published by CCN
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+function generateArticle() {
+    const headline = document.getElementById("headline").value;
+    const story = document.getElementById("story").value;
+
+    if(!headline || !story){
+        alert("Fill out both fields!");
+        return;
+    }
+
+    document.getElementById("articleHeadline").textContent = headline;
+    document.getElementById("articleStory").textContent = story;
+
+    // Get first keyword from headline
+    let keyword = headline.split(" ")[0];
+
+    // Random related image
+    document.getElementById("articleImage").src =
+        `https://source.unsplash.com/1200x600/?${encodeURIComponent(keyword)}`;
+
+    document.getElementById("article").style.display = "block";
+}
+</script>
+
+</body>
+</html>
