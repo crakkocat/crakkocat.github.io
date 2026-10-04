@@ -1,0 +1,6 @@
+{
+  "name": "CatAuth - Account & OAuth System for crakkocat.com",
+  "description": "Secure authentication protocol and user account system for crakkocat.com featuring Google & GitHub OAuth, email verification, salted cryptographic hashing, 2FA, session control, and developer SDK.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
